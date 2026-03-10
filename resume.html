@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Еприцкий Денис — Бизнес-аналитик</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0f0e0c;
+    --paper: #f5f1ea;
+    --cream: #ede8de;
+    --accent: #c8410e;
+    --gold: #b8892a;
+    --muted: #7a7469;
+    --line: #d4cec3;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 64px 48px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 340px; height: 340px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(200,65,14,0.35);
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(184,137,42,0.3);
+  }
+
+  .header-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: end;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header-tag {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 6vw, 62px);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #fff;
+  }
+
+  h1 span {
+    color: var(--gold);
+  }
+
+  .subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245,241,234,0.55);
+    margin-top: 10px;
+  }
+
+  .header-meta {
+    text-align: right;
+    font-size: 13px;
+    color: rgba(245,241,234,0.5);
+    line-height: 2;
+  }
+
+  .header-meta a {
+    color: rgba(245,241,234,0.75);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .header-meta a:hover { color: var(--gold); }
+
+  /* ── LAYOUT ── */
+  .page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 0 48px;
+  }
+
+  /* ── SIDEBAR ── */
+  aside {
+    padding-top: 48px;
+  }
+
+  .sidebar-block {
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .sidebar-block:nth-child(1) { animation-delay: 0.1s; }
+  .sidebar-block:nth-child(2) { animation-delay: 0.2s; }
+  .sidebar-block:nth-child(3) { animation-delay: 0.3s; }
+  .sidebar-block:nth-child(4) { animation-delay: 0.4s; }
+
+  .sidebar-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 8px;
+    font-size: 13.5px;
+    color: var(--ink);
+  }
+
+  .contact-item a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .contact-item a:hover { text-decoration: underline; }
+
+  .contact-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--muted);
+  }
+
+  .skill-pill {
+    display: inline-block;
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    margin: 3px 3px 3px 0;
+    color: var(--ink);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .skill-pill:hover {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  .skill-pill.accent {
+    background: rgba(200,65,14,0.08);
+    border-color: rgba(200,65,14,0.25);
+    color: var(--accent);
+  }
+
+  .course-item {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .course-year {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--gold);
+    white-space: nowrap;
+    padding-top: 2px;
+  }
+
+  .course-name {
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  /* ── MAIN CONTENT ── */
+  main {
+    padding-top: 48px;
+    border-left: 1px solid var(--line);
+    padding-left: 48px;
+  }
+
+  .section {
+    margin-bottom: 52px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .section:nth-child(1) { animation-delay: 0.15s; }
+  .section:nth-child(2) { animation-delay: 0.25s; }
+  .section:nth-child(3) { animation-delay: 0.35s; }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .about-text {
+    font-size: 15px;
+    line-height: 1.75;
+    color: #3a3830;
+    max-width: 560px;
+  }
+
+  /* Education */
+  .edu-block {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 18px 20px;
+    background: var(--cream);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+  }
+
+  .edu-year {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    white-space: nowrap;
+    padding-top: 2px;
+  }
+
+  .edu-info strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 3px;
+  }
+
+  .edu-info span {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  /* Projects */
+  .project-card {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 22px 24px;
+    margin-bottom: 18px;
+    background: #fff;
+    transition: box-shadow 0.25s, transform 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.3s ease;
+  }
+
+  .project-card:hover {
+    box-shadow: 0 8px 32px rgba(15,14,12,0.09);
+    transform: translateY(-2px);
+  }
+
+  .project-card:hover::before { transform: scaleY(1); }
+
+  .project-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .project-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    font-weight: 700;
+  }
+
+  .project-role {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--accent);
+    padding: 3px 9px;
+    border-radius: 3px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .project-desc {
+    font-size: 13.5px;
+    color: #4a4840;
+    line-height: 1.65;
+    margin-bottom: 12px;
+  }
+
+  .project-tasks {
+    font-size: 12.5px;
+    color: var(--muted);
+    padding-left: 14px;
+    border-left: 2px solid var(--line);
+    line-height: 1.6;
+  }
+
+  .project-tasks strong {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: rgba(245,241,234,0.4);
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .header-inner { grid-template-columns: 1fr; }
+    .header-meta { text-align: left; }
+    .page { grid-template-columns: 1fr; }
+    main { border-left: none; padding-left: 0; border-top: 1px solid var(--line); padding-top: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="header-inner">
+    <div>
+      <div class="header-tag">Резюме · Бизнес-аналитик</div>
+      <h1>Еприцкий <span>Денис</span></h1>
+    </div>
+    <div class="header-meta">
+      <div>📍 Томск, РФ</div>
+      <div>Возраст: 21 год</div>
+    </div>
+  </div>
+</header>
+
+<!-- ── BODY ── -->
+<div class="page">
+
+  <!-- ── SIDEBAR ── -->
+  <aside>
+
+    <div class="sidebar-block">
+      <div class="sidebar-label">Контакты</div>
+      <div class="contact-item">
+        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M22 16.92V19a2 2 0 01-2.18 2A19.8 19.8 0 013 4.18 2 2 0 015 2h2.09a2 2 0 012 1.72c.13.96.36 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91A16 16 0 0014.09 15.9l1.27-1.27a2 2 0 012.11-.45c.9.36 1.85.59 2.81.72A2 2 0 0122 16.92z"/>
+        </svg>
+        <a href="tel:+79025684483">+7 902 568-44-83</a>
+      </div>
+      <div class="contact-item">
+        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+        </svg>
+        <a href="mailto:dae29@tpu.ru">dae29@tpu.ru</a>
+      </div>
+      <div class="contact-item">
+        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/>
+        </svg>
+        <a href="https://github.com/Alcoaster" target="_blank">github.com/Alcoaster</a>
+      </div>
+    </div>
+
+    <div class="sidebar-block">
+      <div class="sidebar-label">Навыки</div>
+      <div>
+        <span class="skill-pill accent">IDEF</span>
+        <span class="skill-pill accent">UML</span>
+        <span class="skill-pill accent">BPMN</span>
+        <span class="skill-pill accent">EPC</span>
+        <span class="skill-pill">Git</span>
+        <span class="skill-pill">Python</span>
+        <span class="skill-pill">JavaScript</span>
+        <span class="skill-pill">C#</span>
+        <span class="skill-pill">Kotlin</span>
+        <span class="skill-pill">SQL</span>
+        <span class="skill-pill">MySQL</span>
+        <span class="skill-pill">SQLite</span>
+        <span class="skill-pill">SSMS</span>
+        <span class="skill-pill">TDM</span>
+        <span class="skill-pill">Excel</span>
+        <span class="skill-pill">PowerPoint</span>
+        <span class="skill-pill">Jira</span>
+      </div>
+    </div>
+
+    <div class="sidebar-block">
+      <div class="sidebar-label">Языки</div>
+      <div class="contact-item" style="margin-bottom:4px;">
+        <span style="font-size:18px;">RU</span>
+        <span style="font-size:13.5px;">Русский — родной</span>
+      </div>
+      <div class="contact-item">
+        <span style="font-size:18px;">EN</span>
+        <span style="font-size:13.5px;">English — B1 (Intermediate)</span>
+      </div>
+    </div>
+
+    <div class="sidebar-block">
+      <div class="sidebar-label">Курсы</div>
+      <div class="course-item">
+        <div class="course-year">2025</div>
+        <div class="course-name">Октагон — Чат‑боты</div>
+      </div>
+      <div class="course-item">
+        <div class="course-year">2024</div>
+        <div class="course-name">Яндекс.Образование — Python</div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <main>
+
+    <div class="section">
+      <div class="section-title">О себе</div>
+      <p class="about-text">
+        Начинающий специалист, студент 4-го курса в области бизнес-аналитики с успешным опытом участия в учебных и pet-проектах. Активно развиваю компетенции в аналитике бизнеса и интеграции IT-решений, готов брать ответственность за роль посредника между заказчиком и разработчиками. Легко устанавливаю контакт с людьми и эффективно решаю сложные ситуации.
+      </p>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Образование</div>
+      <div class="edu-block">
+        <div class="edu-year">2026</div>
+        <div class="edu-info">
+          <strong>Томский политехнический университет</strong>
+          <span>Бакалавр · ИШИТР</span><br>
+          <span style="color:var(--ink); font-size:14px; font-weight:500;">Информационно-аналитические системы и технологии в бизнесе</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Опыт разработки</div>
+
+      <!-- HR-Guardian -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-name">HR-Guardian</div>
+          <div class="project-role">Бэкенд-разработчик</div>
+        </div>
+        <p class="project-desc">
+          Система автоматизации работы HR-специалистов: интеллектуальный чат-бот на основе актуальной базы знаний для ответов на типовые вопросы сотрудников и централизованное веб-управление кадровой документацией с контролем версий.
+        </p>
+        <div class="project-tasks">
+          <strong>Выполняемые задачи</strong>
+          Написание системы на Django REST и PostgreSQL для взаимодействия с данными о пользователях (профили, отзывы о системе, диалоги) и документах компании.
+        </div>
+      </div>
+
+      <!-- CV-AI -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-name">CV-AI</div>
+          <div class="project-role">Продакт-менеджер</div>
+        </div>
+        <p class="project-desc">
+          Умный помощник для повышения шансов соискателей на трудоустройство: подбор вакансий по профилю, рекомендации по улучшению резюме, AI-мок-интервью с анализом ответов, автоотклик на вакансии.
+        </p>
+        <div class="project-tasks">
+          <strong>Выполняемые задачи</strong>
+          Распределение задач в команде через Jira, составление технических заданий с использованием нотаций IDEF и UML, отчётность перед заказчиком (преподавателем) о проделанной работе.
+        </div>
+      </div>
+
+      <!-- Studentbot -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-name">Student Bot</div>
+          <div class="project-role">Разработчик</div>
+        </div>
+        <p class="project-desc">
+          Telegram-бот для студентов: помощь в учёбе, организация времени, информация о событиях университета.
+        </p>
+        <div class="project-tasks">
+          <strong>Выполняемые задачи</strong>
+          Полная разработка бота на Node.js с использованием MySQL, ORM Sequelize и node-telegram-bot-api.
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<footer>
+  Еприцкий Денис Алексеевич · Томск · 2025
+</footer>
+
+</body>
+</html>
